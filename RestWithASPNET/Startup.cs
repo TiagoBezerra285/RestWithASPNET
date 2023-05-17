@@ -114,8 +114,8 @@ namespace RestWithASPNETUdemy
                     });
             });
 
-            var connection = Configuration["MySqlConnection:MySqlConnectionString"];
-            services.AddDbContext<MySQLContext>(options => options.UseNpgsql(connection));
+            var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+            services.AddDbContext<MySQLContext>(options => options.UseMySql(connection));
 
             if (Environment.IsDevelopment())
             {
@@ -188,7 +188,6 @@ namespace RestWithASPNETUdemy
             try
             {
                 var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connection);
-                //var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connection);
                 var evolve = new Evolve.Evolve(evolveConnection, msg => Log.Information(msg))
                 {
                     Locations = new List<string> { "db/migrations", "db/dataset" },
